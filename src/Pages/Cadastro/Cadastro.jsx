@@ -1,9 +1,9 @@
-import style from "./CadastroTeste.module.css";
+import style from "./Cadastro.module.css";
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import FormularioTeste from "./FormularioTeste";
 
-function CadastroTeste() {
+function Cadastro() {
 
   const [image, setImage] = useState("");
   const [endImg] = useState("./ImgiconU.png");
@@ -79,4 +79,4 @@ function CadastroTeste() {
   );
 }
 
-export default CadastroTeste;
+export default Cadastro;
