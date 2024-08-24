@@ -2,7 +2,7 @@ import style from "./Cadastro.module.css";
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Formulario from "./Formulario";
-
+import axios from 'axios';
 
 function Cadastro() {
 
@@ -11,72 +11,66 @@ function Cadastro() {
 
   // Objeto Salao
   const salao = {
-    id:0, 
-    nomeSalao:'',
-    proprietarioSalao:'',
-    email:'',
-    senha:'',
-    ruaSalao:'',
-    numeroSalao:'',
-    bairroSalao:'',
-    cnpj:'',
-    telefoneSalao:'',
-    seloSalao:''
+    id: 0,
+    nomeSalao: '',
+    proprietarioSalao: '',
+    email: '',
+    senha: '',
+    ruaSalao: '',
+    numeroSalao: '',
+    bairroSalao: '',
+    cnpj: '',
+    telefoneSalao: '',
+    seloSalao: ''
   }
 
   //UseState
   const [btnFinalizar, setBtnFinalizar] = useState(true);
   const [saloes, setSaloes] = useState([]);
   const [objSalao, setObjSalao] = useState(salao);
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   //UseEffect
-  useEffect(()=>{
-    fetch("http://localhost:8080/listar")
-    .then(retorno => retorno.json())
-    .then(retorno_convertido => setSaloes(retorno_convertido));
+  useEffect(() => {
+    axios.get('http://localhost:8080/listar')
+      .then(response => setSaloes(response.data))
+      .catch(error => console.error('Erro ao buscar salões:', error));
   }, []);
 
   //Obtendo os dados do formulário
   const aoDigitar = (e) => {
-    setObjSalao({...objSalao, [e.target.name]:e.target.value});
+    setObjSalao({ ...objSalao, [e.target.name]: e.target.value });
   }
 
   // Cadastrar salao
-  const cadastrar = () =>{
-    fetch('http://localhost:8080/cadastrar',{
-      method:'post',
-      body:JSON.stringify(objSalao),
-      headers:{
-        'Content-type':'application/json',
-        'Accept':'application/json'
+  const cadastrar = () => {
+    axios.post('http://localhost:8080/cadastrar', objSalao, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       }
-
     })
-    .then(retorno => retorno.json())
-    .then(retorno_convertido =>{
-      
-      if( retorno_convertido.mensagem !==undefined){
-        alert(retorno_convertido.mensagem);
-      }else{
-        setSaloes([...saloes, retorno_convertido]);
-        navigate('/PageConclusaoCadastro');
-        limparFormulario();
-      }
-      
-    })
-    
+      .then(response => {
+        if (response.data.mensagem !== undefined) {
+          alert(response.data.mensagem);
+        } else {
+          setSaloes([...saloes, response.data]);
+          navigate('/PageConclusaoCadastro');
+          limparFormulario();
+        }
+      })
+      .catch(error => console.error('Erro ao cadastrar salão:', error));
   }
 
   //Limpar formulario
-  const limparFormulario = () =>{
+  const limparFormulario = () => {
     setObjSalao(salao);
     setBtnFinalizar(true);
   }
 
 
   return (
-    <Formulario botao={btnFinalizar} eventoTeclado={aoDigitar} cadastrar={cadastrar} obj={objSalao}/>
+    <Formulario botao={btnFinalizar} eventoTeclado={aoDigitar} cadastrar={cadastrar} obj={objSalao} />
   );
 }
 
