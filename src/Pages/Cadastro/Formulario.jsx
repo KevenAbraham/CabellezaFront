@@ -2,7 +2,7 @@ import style from './Formulario.module.css';
 import { IMaskInput } from "react-imask";
 import { useState } from 'react';
 
-function FormularioTeste({eventoTeclado, cadastrar, obj}){
+function Formulario({eventoTeclado, cadastrar, obj}){
 
     const [image, setImage] = useState("");
     const [endImg] = useState("./ImgiconU.png");
@@ -249,4 +249,4 @@ function FormularioTeste({eventoTeclado, cadastrar, obj}){
 
 }
 
-export default FormularioTeste;
+export default Formulario;

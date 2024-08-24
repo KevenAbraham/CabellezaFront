@@ -1,7 +1,8 @@
 import style from "./Cadastro.module.css";
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import FormularioTeste from "./FormularioTeste";
+import Formulario from "./Formulario";
+
 
 function Cadastro() {
 
@@ -75,7 +76,7 @@ function Cadastro() {
 
 
   return (
-    <FormularioTeste botao={btnFinalizar} eventoTeclado={aoDigitar} cadastrar={cadastrar} obj={objSalao}/>
+    <Formulario botao={btnFinalizar} eventoTeclado={aoDigitar} cadastrar={cadastrar} obj={objSalao}/>
   );
 }
 
