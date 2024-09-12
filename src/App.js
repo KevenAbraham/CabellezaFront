@@ -46,7 +46,7 @@ function App() {
                 <Route path='/Assinatura' element={<Assinatura/>}/>
                 <Route path='/TermosECondicoes' element={<TermosECondicoes/>}/>
                 <Route path='/PoliticaPrivacidade' element={<PoliticaPrivacidade/>}/>
-                <Route path='/Usuario' element={<Perfil/>}/>
+                <Route path='/Perfil/:salaoId' element={<Perfil/>}/>
             </Routes>
         </Router>
     </div>

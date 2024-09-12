@@ -27,24 +27,31 @@ function Boxlogin() {
           },
           body: JSON.stringify({
             email,
-            senha: password,  // Certifique-se de que 'password' é enviado como 'senha'
+            senha: password,
           }),
         });
     
+        const data = await response.json(); // Leia o corpo da resposta uma vez
+    
         if (response.ok) {
-          const data = await response.json();
-          // Redireciona para a página de perfil usando o ID do salão retornado
-          navigate(`/Usuario/${data.salaoId}`);
+          console.log('Dados recebidos da API:', data); // Verifique os dados recebidos
+    
+          // Verifique se o ID do salão está presente na resposta
+          if (data.salaoId) {
+            localStorage.setItem('authToken', data.token || ''); // Armazene o token, se presente
+            navigate(`/Perfil/${data.salaoId}`); // Redirecione para o perfil com o ID do salão
+          } else {
+            toastr.error('ID do salão não encontrado na resposta.');
+          }
         } else {
-          toastr.error('E-mail ou senha inválidos!');
+          console.error('Erro na resposta da API:', data);
+          toastr.error(data.message || 'E-mail ou senha inválidos!');
         }
       } catch (error) {
         console.error('Erro ao fazer login:', error);
         toastr.error('Erro ao fazer login. Por favor, tente novamente mais tarde.');
       }
     };
-    
-
 
     const handlePasswordChange = (e) => {
       setPassword(e.target.value);
