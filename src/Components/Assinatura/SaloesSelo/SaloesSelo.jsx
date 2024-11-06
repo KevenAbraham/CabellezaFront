@@ -1,3 +1,4 @@
+// import React, { useState, useEffect } from 'react';
 import style from './SaloesSelo.module.css';
 import ModalTeste from '../../Saloes/Modal/ModalTeste'
 import ImgCentroBeleza from '../../../imagens/salao1.svg';
@@ -27,5 +28,45 @@ function SaloesSelo() {
         </>
     )
 }
+
+// function SaloesSelo() { PARA OS SALÕES VIREM AUTOMATICAMENTE DO BANCO DE DADOS
+//     const [saloes, setSaloes] = useState([]);
+
+//     useEffect(() => {
+//         // Função para buscar salões do backend
+//         async function fetchSaloes() {
+//             try {
+//                 const response = await fetch('http://localhost:5000/api/salao/listar-aleatorios'); // Ajuste o endpoint conforme seu ambiente
+//                 const data = await response.json();
+//                 setSaloes(data);
+//             } catch (error) {
+//                 console.error('Erro ao buscar os salões:', error);
+//             }
+//         }
+
+//         fetchSaloes();
+//     }, []);
+
+//     return (
+//         <section className={style.saloesSelo}>
+//             <h2>Impulsione o seu salão e faça parte do nosso propósito</h2>
+//             <div className={style.containerSaloesSelo}>
+//                 {saloes.map((salao, index) => (
+//                     <div className={style.salaoSelo} key={index}>
+//                         <ModalTeste
+//                             imgCard={salao.ImagemBase64} // A imagem já estará em base64
+//                             NomeSalao={salao.NomeSalao}
+//                             EndSalao={salao.Endereco}
+//                             ModalTitle={salao.NomeSalao}
+//                             ImageSalaoModal={salao.ImagemBase64}
+//                             TelSalao={salao.TelefoneSalao}
+//                         />
+//                     </div>
+//                 ))}
+//             </div>
+//         </section>
+//     );
+// }
+
 
 export default SaloesSelo;

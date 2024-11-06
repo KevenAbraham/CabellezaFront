@@ -1,4 +1,4 @@
-import Header from '../../Components/Header/Header';
+// import Header from '../../Components/Header/Header';
 import CadastreSeuSalao from '../../Components/Assinatura/CadastreSeuSalao/CadastreSeuSalao';
 import SaloesSelo from '../../Components/Assinatura/SaloesSelo/SaloesSelo';
 import TabelaPlanos from '../../Components/Assinatura/TabelaPlanos/TabelaPlanos';
@@ -9,7 +9,7 @@ import Footer from '../../Components/Footer/Footer';
 function Assinatura() {
     return (
         <>
-            <Header />
+            {/* <Header /> */}
 
             <CadastreSeuSalao />
             <SaloesSelo />

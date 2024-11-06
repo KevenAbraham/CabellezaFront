@@ -1,55 +1,34 @@
 import './App.css';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
+import Cadastro from './Pages/Cadastro/Cadastro';
 import SobreNos from './Pages/SobreNos/SobreNos';
 import Blog from './Pages/Blog/Blog';
 import FaleConosco from './Pages/FaleConosco/FaleConosco';
 import Saloes from './Pages/Saloes/Saloes';
-import CadastroSalao from './Pages/Cadastro/CadastroSalao';
-import Assinatura from './Pages/Assinatura/Assinatura';
-import PagePlanos from './Pages/Planos/PagePlanos';
-import PageConclusaoCadastro from './Pages/PageConclusaoCadastro/PageConclusaoCadastro';
-// import PageDados from './Pages/Dados/PageDado';
-import TermosECondicoes from './Pages/TermosECondicoes/TermosECondicoes';
-import PoliticaPrivacidade from './Pages/PoliticaPrivacidade/PoliticaPrivacidade';
-import ScrollToTop from './hooks/ScrollToTop';
 import Perfil from './Components/PerfilUsuario/Perfil';
-import Cadastro from './Pages/Cadastro/Cadastro';
-import Artigo1 from '../src/Components/Artigos/Artigo1';
-import Artigo2 from '../src/Components/Artigos/Artigo2';
-import Artigo3 from '../src/Components/Artigos/Artigo3';
-import Artigo4 from '../src/Components/Artigos/Artigo4';
+import Header from './Components/Header/Header';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
+  const location = useLocation();
+  const hideHeaderRoutes = ["/Login", "/Perfil"];
 
   return (
-    <div className="App">
-        <Router>
-          <ScrollToTop/>
-            <Routes>
-                <Route path='/' element={<Home/>} />
-                <Route path='/Login' element={<Login/>} />
-                <Route path='/SobreNos' element={<SobreNos/>} />
-                <Route path='/Saloes' element={<Saloes/>} />
-                <Route path='/Blog' element={<Blog/>} />
-                <Route path='/Artigo1' element={<Artigo1/>} />
-                <Route path='/Artigo2' element={<Artigo2/>} />
-                <Route path='/Artigo3' element={<Artigo3/>} />
-                <Route path='/Artigo4' element={<Artigo4/>} />
-                <Route path='/FaleConosco' element={<FaleConosco/>} />
-                <Route path='/Planos' element={<PagePlanos/>} />
-                {/* <Route path='/Dados' element={<PageDados/>} /> */}
-                {/* <Route path='/cadastrosalao' element={<CadastroSalao/>} /> */}
-                <Route path='/Cadastro' element={<Cadastro/>} />
-                <Route path='/PageConclusaoCadastro' element={<PageConclusaoCadastro/>} />
-                <Route path='/Assinatura' element={<Assinatura/>}/>
-                <Route path='/TermosECondicoes' element={<TermosECondicoes/>}/>
-                <Route path='/PoliticaPrivacidade' element={<PoliticaPrivacidade/>}/>
-                <Route path='/Perfil/:salaoId' element={<Perfil/>}/>
-            </Routes>
-        </Router>
-    </div>
+    <AuthProvider>
+      {!hideHeaderRoutes.includes(location.pathname) && <Header />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Cadastro" element={<Cadastro />} />
+        <Route path="/SobreNos" element={<SobreNos />} />
+        <Route path="/Saloes" element={<Saloes />} />
+        <Route path="/Blog" element={<Blog />} />
+        <Route path="/FaleConosco" element={<FaleConosco />} />
+        <Route path="/Perfil/:salaoId" element={<Perfil />} />
+      </Routes>
+    </AuthProvider>
   );
 }
 

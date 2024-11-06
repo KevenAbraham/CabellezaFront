@@ -1,6 +1,6 @@
 import style from './FaleConosco.module.css';
 import meiaLinha from '../../imagens/meia-linha.png';
-import Header from '../../Components/Header/Header';
+// import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import Formulario from '../../Components/FaleConosco/Formulario/Formulario';
 import {BsFillTelephoneFill, BsEnvelopeFill} from "react-icons/bs";
@@ -8,7 +8,7 @@ import {BsFillTelephoneFill, BsEnvelopeFill} from "react-icons/bs";
 function FaleConosco() {
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <div className={style.FaleConosco}>
                 <p>Fale Conosco</p>
             </div>
@@ -43,7 +43,7 @@ function FaleConosco() {
                     <a href="tel:+5511000000000" className={style.divMeios}>
                         <BsFillTelephoneFill className={style.divMeiosIcon}/>
                         <div>
-                            <span>(11) 94987-9357</span>
+                            <span>(11) 99110-5600</span>
                             <p>Nossos atendentes estão prontos para te atender</p>
                         </div>
                     </a>

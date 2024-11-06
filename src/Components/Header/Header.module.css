@@ -12,9 +12,90 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 3;
+    z-index: 334534534;
     box-shadow: 1px 1px 10px #00000036;
 }
+
+.userProfile {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.profileImage {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    overflow: hidden;
+    z-index: 1000;
+    width: 200px;
+}
+
+.dropdownMenu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease-in;
+}
+
+.dropdownMenu button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: #D12874;
+    width: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.dropdownMenu button:hover {
+    color: #D12874;
+}
+
+.dropdownMenu button:hover::after {
+    width: 100%;
+}
+
+.profileName {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    transition: color 0.3s ease-in;
+}
+
+.profileName::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Um pouco abaixo do texto */
+    height: 2px;
+    background-color: #D12874;
+    width: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.profileName:hover {
+    color: #D12874;
+}
+
+.profileName:hover::after {
+    width: 100%;
+}
+
 
 .fixed{
     position: fixed;
@@ -56,16 +137,11 @@ header nav button{
     width: 140px;
     padding: 5%;
     border: 2px solid transparent;
-    background: linear-gradient(#fafafa, #fafafa) padding-box, linear-gradient(90deg, #D12874CC, #FAFF74E5) border-box;
+    background: linear-gradient(#fafafa, #fafafa) padding-box, linear-gradient(90deg, #D12874CC, #0ea53b) border-box;
     border-radius: 20px;
     cursor: pointer;
     color: #1c2b1a;
     transition: 0.3s ease-in;
-}
-
-header nav button:hover{
-    box-shadow: 0 0 10px #d12874ce;
-    transform: translateY(1px);
 }
 
 /*MENU RESPONSIVO*/

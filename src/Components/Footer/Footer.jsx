@@ -35,7 +35,7 @@ export default function Footer() {
                         <h2>Contato</h2>
                         <ul>
                             <li><a href="mailto:cabelleeza@gmail.com?subject=Informações sobre o projeto Cabelleza">cabelleeza@gmail.com</a></li>
-                            <li><a href="tel:+5511000000000"><BsTelephone />(11)00000-0000</a></li>
+                            <li><a href="tel:+5511000000000"><BsTelephone />(11)99110-5600</a></li>
                         </ul>
                     </div>
                     <div>

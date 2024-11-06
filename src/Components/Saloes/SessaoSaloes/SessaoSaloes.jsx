@@ -1,93 +1,92 @@
+import { useEffect, useState } from 'react';
 import style from './SessaoSaloes.module.css';
 import ModalTeste from '../Modal/ModalTeste';
-import ImageSalaoEncanto from '../../../imagens/salao1.svg';
-import ImgCabeloEstilo from '../../../imagens/salao2.svg';
-import ImgCabeloDivino from '../../../imagens/salao3.svg';
-import ImgEstudioElegancia from '../../../imagens/salao4.svg';
-import ImgEstiloGraca from '../../../imagens/salao5.svg';
-import ImgBellaDiva from '../../../imagens/salao6.svg';
-import ImgCentroBeleza from '../../../imagens/salao7.svg';
-import ImgRefugioBeleza from '../../../imagens/salao8.svg';
-import ImgGlam from '../../../imagens/salao9.svg';
-import ImgSegredos from '../../../imagens/salao10.svg';
-import ImgCharme from '../../../imagens/salao12.svg';
-import ImgBellaHair from '../../../imagens/salao13.svg';
-
 
 function SessaoSaloes() {
+    const [saloes, setSaloes] = useState([]); // Estado para armazenar os salões
+    const [currentPage, setCurrentPage] = useState(1); // Estado para a página atual
+    const itemsPerPage = 10; // Quantidade de salões por página
+    const [loading, setLoading] = useState(true); // Estado de carregamento
+    const [totalPages, setTotalPages] = useState(1); // Estado para o número total de páginas
+
+    useEffect(() => {
+        console.log('Fetching saloes...');
+        const fetchSaloes = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`https://localhost:7032/api/Salao/listar?page=${currentPage}&limit=${itemsPerPage}`);
+                console.log("Entrou no try");
+                const data = await response.json();
+                console.log(data);
+                setSaloes(data.saloes); // Note que 'saloes' está em minúsculo
+                setTotalPages(data.totalPages); 
+                setLoading(false); 
+            } catch (error) {
+                console.error('Erro ao buscar salões:', error);
+                setLoading(false);
+            }
+        };
+
+        fetchSaloes();
+    }, [currentPage]);
+
+    const goToNextPage = () => {
+        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    };
+
+    const goToPreviousPage = () => {
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
+    };
+
+    if (loading) {
+        return <p>Carregando salões...</p>; 
+    }
 
     return (
-
         <div className={style.SessaoSaloes}>
             <div className={style.SessaoTituloSaloes}>
                 <div className={style.ImagemDetalheSuperiorEsquerdo}>
-                <div className={style.AreaTituloSessaoSaloes}>
-                    <h1 className={style.TituloSessaoSaloes}>Salões que devolvem sorrisos</h1>
-                </div>
+                    <div className={style.AreaTituloSessaoSaloes}>
+                        <h1 className={style.TituloSessaoSaloes}>Salões que devolvem sorrisos</h1>
+                    </div>
                 </div>
             </div>
-            
+    
             <div className={style.AreaCardsAside}>
                 <div className={style.AreaCardsSaloes}>
-                    
-                    <div className={style.AreaTresCards}>                   
-                        <ModalTeste imgCard={ImageSalaoEncanto} NomeSalao="Salão Encanto" EndSalao="Rua Augusta, 123 - Consolação" ModalTitle="Salão Encanto" ImageSalaoModal={ImageSalaoEncanto} TelSalao="(11) 91234-5678"/>
-
-                        <ModalTeste imgCard={ImgCabeloEstilo} NomeSalao="Cabelo e Estilo" EndSalao="Rua Oscar Freire, 456 - Jd Paulista" ModalTitle="Cabelo e Estilo" ImageSalaoModal={ImgCabeloEstilo} TelSalao="(11) 92345-6789"/>
-
-                        <ModalTeste imgCard={ImgCabeloDivino} NomeSalao="Salão Divino" EndSalao="Rua da Mooca, 789 - Mooca" ModalTitle="Salão Divino" ImageSalaoModal={ImgCabeloDivino} TelSalao="(11) 93456-7890"/>
+                    <div className={style.GridSaloes}>
+                        {Array.isArray(saloes) && saloes.length > 0 ? (
+                            saloes.map((salao, index) => (
+                                <ModalTeste
+                                    key={index}
+                                    imgCard={salao.imagemBase64} // Corrigido para minúsculo
+                                    NomeSalao={salao.nomeSalao} // Corrigido para minúsculo
+                                    EndSalao={salao.endereco} // Corrigido para minúsculo
+                                    ModalTitle={salao.nomeSalao} // Corrigido para minúsculo
+                                    ImageSalaoModal={salao.imagemBase64} // Corrigido para minúsculo
+                                    TelSalao={salao.telefoneSalao} // Corrigido para minúsculo
+                                />
+                            ))
+                        ) : (
+                            <p>Nenhum salão encontrado.</p> 
+                        )}
                     </div>
-
-                    <div className={style.AreaTresCards}>
-                        <ModalTeste imgCard={ImgEstudioElegancia} NomeSalao="Estúdio Elegância" EndSalao="Rua Capote Valente, 321 - Pinheiros" ModalTitle="Estúdio Elegância" ImageSalaoModal={ImgEstudioElegancia} TelSalao=" (11) 94567-8901"/>
-                        <ModalTeste imgCard={ImgEstiloGraca} NomeSalao="Estilo & Graça" EndSalao="Av. Faria Lima, 987 - Itaim Bibi" ModalTitle="Estilo & Graça" ImageSalaoModal={ImgEstiloGraca} TelSalao="(11) 95678-9012"/>
-                        <ModalTeste imgCard={ImgBellaDiva} NomeSalao="Bella Diva" EndSalao="R. Teodoro Sampaio, 654 - Pinheiros" ModalTitle="Bella Diva" ImageSalaoModal={ImgBellaDiva} TelSalao="(11) 96789-0123"/>
-                    </div>
-
-                    <div className={style.AreaTresCards}>
-                        <ModalTeste imgCard={ImgCentroBeleza} NomeSalao="Centro de Beleza" EndSalao="Rua Augusta, 321 - Consolação" ModalTitle="Centro de Beleza" ImageSalaoModal={ImgCentroBeleza} TelSalao="(11) 97890-1234"/>
-                        <ModalTeste imgCard={ImgRefugioBeleza} NomeSalao="Refúgio da Beleza" EndSalao="Rua José Paulino, 456 - Bom Retiro" ModalTitle="Refúgio da Beleza" ImageSalaoModal={ImgRefugioBeleza} TelSalao=" (11) 99012-3456"/>
-                        <ModalTeste imgCard={ImgGlam} NomeSalao="Estúdio Glam" EndSalao="Av. Higienópolis, 789 - Higienópolis" ModalTitle="Estúdio Glam" ImageSalaoModal={ImgGlam} TelSalao=" (11) 90123-4567"/>
-                    
-                    </div>
-
-                    <div className={style.AreaTresCards}>
-                        <ModalTeste imgCard={ImgSegredos} NomeSalao="Segredos beauty" EndSalao="R. da Consolação, 987 - Consolação" ModalTitle="Segredos beauty" ImageSalaoModal={ImgSegredos} TelSalao="(11) 92345-6789"/>
-                        <ModalTeste imgCard={ImgCharme} NomeSalao="Salão Charme" EndSalao="R.Oscar Freire, 654 - Cerqueira César" ModalTitle="Salão Charme" ImageSalaoModal={ImgCharme} TelSalao="(11) 93456-7890"/>
-                        <ModalTeste imgCard={ImgBellaHair} NomeSalao="Bella Hair Studio" EndSalao="Av. Nove de Julho, 321 - Jd Paulista" ModalTitle="Bella Hair Studio" ImageSalaoModal={ImgBellaHair} TelSalao="(11) 98901-2345"/>
-                    </div>
-
-                    <div className={style.AreaQuatroCards}>
-                        <ModalTeste imgCard={ImageSalaoEncanto} NomeSalao="Salão Encanto" EndSalao="Rua Augusta, 123 - Consolação" ModalTitle="Salão Encanto" ImageSalaoModal={ImageSalaoEncanto} TelSalao="(11) 91234-5678"/>    
-
-                        <ModalTeste imgCard={ImgCabeloEstilo} NomeSalao="Cabelo e Estilo" EndSalao="Rua Oscar Freire, 456 - Jd Paulista" ModalTitle="Cabelo e Estilo" ImageSalaoModal={ImgCabeloEstilo} TelSalao="(11) 92345-6789"/>
-
-                        <ModalTeste imgCard={ImgCabeloDivino} NomeSalao="Salão Divino" EndSalao="Rua da Mooca, 789 - Mooca" ModalTitle="Salão Divino" ImageSalaoModal={ImgCabeloDivino} TelSalao="(11) 93456-7890"/>
-
-                        <ModalTeste imgCard={ImgEstudioElegancia} NomeSalao="Estúdio Elegância" EndSalao="Rua Capote Valente, 321 - Pinheiros" ModalTitle="Estúdio Elegância" ImageSalaoModal={ImgEstudioElegancia} TelSalao=" (11) 94567-8901"/>
-                    </div>
-
-                    <div className={style.AreaQuatroCards}>
-                        <ModalTeste imgCard={ImgEstiloGraca} NomeSalao="Estilo & Graça" EndSalao="Av. Faria Lima, 987 - Itaim Bibi" ModalTitle="Estilo & Graça" ImageSalaoModal={ImgEstiloGraca} TelSalao="(11) 95678-9012"/>
-                        <ModalTeste imgCard={ImgBellaDiva} NomeSalao="Bella Diva" EndSalao="R Teodoro Sampaio, 654 - Pinheiros" ModalTitle="Bella Diva" ImageSalaoModal={ImgBellaDiva} TelSalao="(11) 96789-0123"/>
-                        <ModalTeste imgCard={ImgCentroBeleza} NomeSalao="Centro de Beleza" EndSalao="Rua Augusta, 321 - Consolação" ModalTitle="Centro de Beleza" ImageSalaoModal={ImgCentroBeleza} TelSalao="(11) 97890-1234"/>
-                        <ModalTeste imgCard={ImgRefugioBeleza} NomeSalao="Refúgio da Beleza" EndSalao="Rua José Paulino, 456 - Bom Retiro" ModalTitle="Refúgio da Beleza" ImageSalaoModal={ImgRefugioBeleza} TelSalao=" (11) 99012-3456"/>
-                    </div>
-
-                    <div className={style.AreaQuatroCards}>
-                        <ModalTeste imgCard={ImgCharme} NomeSalao="Estúdio Glam" EndSalao="Av. Higienópolis, 789 - Higienópolis" ModalTitle="Estúdio Glam" ImageSalaoModal={ImgCharme} TelSalao=" (11) 90123-4567"/>
-                        <ModalTeste imgCard={ImgSegredos} NomeSalao="Segredos beauty" EndSalao="R. da Consolação, 987 - Consolação" ModalTitle="Segredos beauty" ImageSalaoModal={ImgSegredos} TelSalao="(11) 92345-6789"/>
-                        <ModalTeste imgCard={ImgCharme} NomeSalao="Salão Charme" EndSalao="R Oscar Freire, 654 - Cerqueira César" ModalTitle="Salão Charme" ImageSalaoModal={ImgCharme} TelSalao="(11) 93456-7890"/>
-                        <ModalTeste imgCard={ImgBellaHair} NomeSalao="Bella Hair Studio" EndSalao="Av. Nove de Julho, 321 - Jd Paulista" ModalTitle="Bella Hair Studio" ImageSalaoModal={ImgBellaHair} TelSalao="(11) 98901-2345"/>
+    
+                    <div className={style.Paginacao}>
+                        <button onClick={goToPreviousPage} disabled={currentPage === 1}>
+                            Anterior
+                        </button>
+                        <span>{currentPage} de {totalPages}</span>
+                        <button onClick={goToNextPage} disabled={currentPage === totalPages}>
+                            Próximo
+                        </button>
                     </div>
                 </div>
-                
+    
                 <aside className={style.AreaAsideSaloes}>
                     <div className={style.AsidePropaganda1}></div>
                     <div className={style.AsidePropaganda2}></div>
-                   
                 </aside>
-                
             </div>
         </div>
     );

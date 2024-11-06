@@ -8,9 +8,23 @@
     height: 450px;
 }
 
+.Carousel_item:first-child{
+    background-size: cover;
+    background-position-y: -150px;
+    background-repeat: no-repeat;
+    background-image: url(../../../imagens/slide1-corte.png);
+}
+
+.Carousel_item:nth-child(2){
+    background-size: cover;
+    background-position-y: -150px;
+    background-repeat: no-repeat;
+    background-image: url(../../../imagens/slide2-corte.png);
+}
+
 .Carousel_item:last-child{
     background-size: cover;
-    background-position-y: -70px;
+    background-position-y: -150px;
     background-repeat: no-repeat;
     background-image: url(../../../imagens/slide3.png);
 }

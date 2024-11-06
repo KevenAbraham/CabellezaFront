@@ -1,4 +1,4 @@
-import Header from '../../Components/Header/Header';
+// import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import Dicas from '../../Components/Blog/Dicas/Dicas';
 import Podcast from '../../Components/Blog/Podcast/Podcast';
@@ -13,7 +13,7 @@ import Artigos from '../../Components/Blog/Artigos/Artigos';
 function Blog() {
     return(
         <>
-            <Header/>            
+            {/* <Header/>             */}
             <DesabrocharSorrisos/>
             <BemVindo/>
             <PesquisaPorCategoria/>

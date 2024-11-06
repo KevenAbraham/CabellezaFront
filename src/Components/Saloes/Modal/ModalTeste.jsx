@@ -11,26 +11,31 @@ function Example(props) {
 
   return (
     <>
-      <Button 
-      variant="outline-warning" 
-      onClick={handleShow}
-      className={style.EspacamentoButton}
-      style={
-        {width: "270px",
-        height: "350px",
-        backgroundImage: `url(${props.imgCard})`,
-        backgroundSize: "cover",
-        borderRadius: "15px",
-        border:"solid 1px",
-        alignItems:"end",
-        padding: "0",
-        margin: "20px"}}
+      <Button
+        variant="outline-warning"
+        onClick={handleShow}
+        className={style.EspacamentoButton}
+        style={
+          {
+            width: "270px",
+            height: "350px",
+            backgroundImage: `url(${props.imgCard})`,
+            backgroundSize: "cover",
+            borderRadius: "15px",
+            border: "solid 1px",
+            alignItems: "end",
+            padding: "0",
+            margin: "20px"
+          }}
       >
+        {console.log("Image URL: ", props.imgCard)} {/* Verifique a URL da imagem */}
+        
         <div className={style.AreaNomeSalao}>
-            <p className={style.textNomeSalao}>{props.NomeSalao}</p>
-            <p className={style.textEnderecoSaloes}> {props.EndSalao}</p>
+          <p className={style.textNomeSalao}>{props.NomeSalao}</p>
+          <p className={style.textEnderecoSaloes}> {props.EndSalao}</p>
         </div>
       </Button>
+
 
       <Modal
         show={show}
@@ -39,18 +44,20 @@ function Example(props) {
         // keyboard={false}
         centered
         style={
-            {background: "rgba(250, 250, 186, 0.40)",
+          {
+            background: "rgba(250, 250, 186, 0.40)",
             width: "100%",
-            height: "100%",}}
+            height: "100%",
+          }}
         size='lg'
         height='800px'
       >
         <Modal.Header
-        closeButton
-        className={style.customHeader}
-        style={{
-            height:"109px",
-            width:"100%"
+          closeButton
+          className={style.customHeader}
+          style={{
+            height: "109px",
+            width: "100%"
           }}
         >
           <Modal.Title className={style.customTitle}>
@@ -65,18 +72,18 @@ function Example(props) {
             <div className={style.AreaText}>
               <div className={style.ContainerText}>
                 <div className={style.AreaTextEndereco}>
-                    <p className={style.TextEndereco}><span className={style.TitleTextModal}>Endereço:<br></br></span> {props.EndSalao}</p>
-                  </div>
-                  <div className={style.AreaTextTelefone}>
-                    <p className={style.TitleTextModal}>Telefone:</p>
-                    <div className={style.AreaIconWhatsApp}></div>
-                    <div className={style.EspacoTextoTelefone}>
-                      <p className={style.TextTelefone}> {props.TelSalao}</p>
+                  <p className={style.TextEndereco}><span className={style.TitleTextModal}>Endereço:<br></br></span> {props.EndSalao}</p>
+                </div>
+                <div className={style.AreaTextTelefone}>
+                  <p className={style.TitleTextModal}>Telefone:</p>
+                  <div className={style.AreaIconWhatsApp}></div>
+                  <div className={style.EspacoTextoTelefone}>
+                    <p className={style.TextTelefone}> {props.TelSalao}</p>
 
-                    </div>
                   </div>
+                </div>
               </div>
-                
+
             </div>
           </div>
         </Modal.Body>

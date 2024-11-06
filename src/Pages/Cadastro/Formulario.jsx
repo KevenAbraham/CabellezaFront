@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import style from './Formulario.module.css';
 import { IMaskInput } from "react-imask";
+import Logo from '../../imagens/logo.svg';
+import { Link } from 'react-router-dom';
 
 function Formulario({ eventoTeclado, cadastrar, obj, setImage }) {
   const [imagePreview, setImagePreview] = useState(null);
+  const [senha, setSenha] = useState("");
+  const [confirmaSenha, setConfirmaSenha] = useState("");
   const [endImg] = useState("./ImgiconU.png");
 
   // Função para atualizar a visualização da imagem
@@ -13,18 +17,33 @@ function Formulario({ eventoTeclado, cadastrar, obj, setImage }) {
     setImagePreview(URL.createObjectURL(file));
   };
 
+  // Validação para checar se as senhas coincidem
+  const validarSenhas = () => {
+    if (senha !== confirmaSenha) {
+      alert("As senhas não coincidem!");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validarSenhas()) {
+      cadastrar();
+    }
+  };
+
   return (
     <main className={style.Mdados}>
-      <div>
-        <div className={style.linhaTempo}>
-          <span className={style.active}>Planos</span>
-          <hr />
-          <span className={style.active}>Dados</span>
-        </div>
+      <div className={style.ReturnHome}>
+        {/* <Link to="/">
+          <img src={Logo} alt="Logo Cabelleza" className={style.Logo} />
+        </Link> */}
       </div>
-      <section className={style.boxCaixaDados}>
+
+      <section className={style.containerSection}>
         <div className={style.caixaDados}>
-          <form onSubmit={cadastrar}>
+          <form onSubmit={handleSubmit}>
             <h5 className={style.TpessoaF}>Dados cadastrais</h5>
             <div className={style.PrimeiroInputs}>
               <div className={style.divcpf}>
@@ -34,18 +53,18 @@ function Formulario({ eventoTeclado, cadastrar, obj, setImage }) {
                 </div>
                 <div className={style.cnpjdiv}>
                   <label htmlFor="cnpj">CNPJ*</label>
-                  <IMaskInput mask="00.000.000/0000-00" placeholder="00.000.000/0000-00" type="text" value={obj.cnpj} name="cnpj" onChange={eventoTeclado} required />
+                  <IMaskInput mask="00.000.000/0000-00" value={obj.cnpj} name="cnpj" onChange={eventoTeclado} placeholder="00.000.000/0000-00" required />
                 </div>
                 <div className={style.tele}>
                   <label htmlFor="telefone">Telefone Salão*</label>
-                  <IMaskInput mask="(00) 00000-0000" type="text" value={obj.telefoneSalao} onChange={eventoTeclado} name="telefoneSalao" placeholder="Telefone salão" />
+                  <IMaskInput mask="(00) 00000-0000" value={obj.telefoneSalao} onChange={eventoTeclado} name="telefoneSalao" placeholder="Telefone salão" required />
                 </div>
               </div>
             </div>
-            <div className={style.SegundosInpust}>
+            <div className={style.SegundosInput}>
               <div className={style.divnomecrontato}>
                 <label htmlFor="name">Nome contratante*</label>
-                <input type="text" name="proprietarioSalao" value={obj.proprietarioSalao} onChange={eventoTeclado} placeholder="Digite aqui o nome do salão..." required />
+                <input type="text" name="proprietarioSalao" value={obj.proprietarioSalao} onChange={eventoTeclado} placeholder="Digite aqui o nome do contratante..." required />
               </div>
               <div className={style.divemail}>
                 <label htmlFor="e-mail">E-mail salão*</label>
@@ -55,11 +74,11 @@ function Formulario({ eventoTeclado, cadastrar, obj, setImage }) {
             <div className={style.TerceiroInpust}>
               <div className={style.divsenha}>
                 <label htmlFor="password">Senha*</label>
-                <input type="password" name="senha" placeholder="Senha..." value={obj.senha} onChange={eventoTeclado} required />
+                <input type="password" name="senha" placeholder="Senha..." value={senha} onChange={(e) => setSenha(e.target.value)} required />
               </div>
               <div className={style.divconfirmasenha}>
                 <label htmlFor="confirma password">Confirma senha*</label>
-                <input type="password" name="confirmaSenha" placeholder="Confirme a senha aqui..." required />
+                <input type="password" name="confirmaSenha" placeholder="Confirme a senha aqui..." value={confirmaSenha} onChange={(e) => setConfirmaSenha(e.target.value)} required />
               </div>
             </div>
             <h5 className={style.Tpessoa}>Insira a imagem do seu salão</h5>
@@ -67,7 +86,7 @@ function Formulario({ eventoTeclado, cadastrar, obj, setImage }) {
               <div className={style.imgdiv}>
                 <input type="file" name="imagem" onChange={handleImageChange} />
                 <br /> <br />
-                <img src={imagePreview || endImg} alt="Imagem" width="150" height="150" />
+                <img src={imagePreview || endImg} alt="Imagem do salão" className={style.previewImg} />
                 <br />
               </div>
             </div>

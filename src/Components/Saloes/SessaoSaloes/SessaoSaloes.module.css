@@ -121,6 +121,35 @@
         }
     }
 }
+.Paginacao {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza os botões */
+    margin-top: 20px;
+    gap: 10px; /* Espaçamento entre os botões */
+}
+
+.Paginacao button {
+    background-color: #D12874; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    border: none; /* Remove as bordas */
+    padding: 10px 20px; /* Espaçamento interno */
+    font-size: 16px; /* Tamanho da fonte */
+    border-radius: 5px; /* Deixa os cantos arredondados */
+    cursor: pointer; /* Exibe o cursor de mão ao passar o mouse */
+    transition: background-color 0.3s ease; /* Transição suave para mudanças de cor */
+}
+
+.Paginacao button:hover {
+    background-color: #B01E60; /* Cor ao passar o mouse sobre o botão */
+}
+
+.Paginacao button:disabled {
+    background-color: #f0f0f0; /* Cor do botão desativado */
+    color: #aaa; /* Cor do texto desativado */
+    cursor: not-allowed; /* Cursor indicando que o botão está desativado */
+}
+
 
 @media only screen and (min-width: 481px) {
     @media only screen and (max-width: 768px) {

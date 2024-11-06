@@ -1,11 +1,3 @@
-.linhaTempo {
-    margin: auto;
-    width: 60%;
-    display: flex;
-    justify-content: space-evenly;
-    font-size: 20px;
-}
-
 .active::after {
     content: "";
     background-color: #D12874;
@@ -16,8 +8,14 @@
     margin: 5px auto;
 }
 
-.boxCaixaDados {
-    margin-top: 20px;
+.ReturnHome {
+    position: absolute;
+    left: 35px;
+    top: 10px;
+}
+
+.containerSection {
+    padding: 20px;
     width: 100%;
     min-height: 1060px;
     background-image: url(../../imagens/Fundo-Dados\ \(1\).png);
@@ -26,32 +24,19 @@
 }
 
 .caixaDados {
-    width: 90%;
-    height: auto;
+    width: 60%;
     margin: auto;
     background-color: #FCBBE2;
     border-radius: 10px;
     display: flex;
 }
 
-.SegundosInpust {
-    display: block;
-    display: flex;
-    flex-direction: column;
-    margin: 50px auto;
-    width: 97%;
-    /* background-color: aqua; */
-}
-
 .PrimeiroInputs {
     width: 97%;
     /* background-color: aqua; */
     margin: 30px auto;
-    height: 50px;
     display: flex;
 }
-
-/* .PrimeiroInputs input {} */
 
 .nomef {
     width: 55%;
@@ -106,7 +91,7 @@
 }
 
 .Tpessoa {
-    width: 40%;
+    width: 50%;
     text-align: left;
     font-size: 30px;
     margin-top: 20px;
@@ -121,29 +106,33 @@
     color: #D12874;
 }
 
-.SegundosInpust {
-    width: 97.5%;
+.SegundosInput {
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto;
+    width: 97%;
+    /* background-color: aqua; */
     height: 40px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.SegundosInpust input {
+.SegundosInput input {
     padding: 5px;
     width: 95%;
     height: 40px;
     margin: 0px 10px 18px 14px;
     border-radius: 5px;
     border: solid 2px #D12874;
-    /* margin-bottom: 18px; */
+    /* margin-bottom: 18px; */  
 }
 
-.SegundosInpust label {
+.SegundosInput label {
     margin-left: 14px;
 }
 
-/* .SegundosInpust input:nth-child(6) {} */
+/* .SegundosInput input:nth-child(6) {} */
 
 .divnomecrontato {
     width: 52%;
@@ -159,12 +148,10 @@
 
 .boximgsalao {
     width: 100%;
-    height: 290px;
 }
 
 .imgdiv {
     width: 40%;
-    height: 500px;
     padding: 15px;
     margin-left: 30px;
     background-color: #ffffff;
@@ -238,7 +225,7 @@
     font-size: 13px;
 }
 
-.SegundosInpust input::placeholder {
+.SegundosInput input::placeholder {
     padding-left: 7px;
     font-size: 13px;
 }
@@ -489,7 +476,7 @@ input:focus {
             margin-top: 50px;
         }
 
-        .SegundosInpust .divnomecrontato {
+        .SegundosInput .divnomecrontato {
             margin: auto;
             width: 90%;
 
@@ -502,7 +489,7 @@ input:focus {
         }
 
 
-        .SegundosInpust {
+        .SegundosInput {
             display: block;
             width: 100%;
             height: 230px;
@@ -517,7 +504,7 @@ input:focus {
             height: 40px;
         }
 
-        .SegundosInpust .divemail {
+        .SegundosInput .divemail {
             width: 90%;
             margin: 20px auto;
         }
